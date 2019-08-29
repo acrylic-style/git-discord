@@ -6,7 +6,8 @@ module.exports = (server, type, data) => {
       break
     }
     case 'channelDelete': { // rollback of channel deletion -> create channel
-      client.guilds.get(server).createChannel(data.split(',')[1], { type: data.split(',')[2], parent: data.split(',')[2] })
+      // [0] = id of channel, [1] = name of channel, [2] = type of channel, [3] = parent id of channel
+      client.guilds.get(server).createChannel(data.split(',')[1], { type: data.split(',')[2], parent: data.split(',')[3] })
       break
     }
   }
