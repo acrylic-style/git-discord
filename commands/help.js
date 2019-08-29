@@ -35,6 +35,8 @@ module.exports = class extends Command {
       .addField('eval', lang['commands']['eval'])
       .addField('version', lang['commands']['version'])
       .addField('log', lang['commands']['log'])
+      .addField('reset', lang['commands']['reset'])
+      .addField('rollback', lang['commands']['rollback'])
       .addField('Note!', `\`${args[0]} [Command]\` for more help!`)
       .setColor([0,255,0])
     sendDeletable(embed)

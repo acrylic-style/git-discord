@@ -1,16 +1,19 @@
+// #region .yaml support
 const YAML = require('yaml')
 const fs = require('fs')
 require.extensions['.yml'] = function(module, filename) {
   module.exports = YAML.parse(fs.readFileSync(filename, 'utf8'))
 }
+// #endregion .yaml support
 const dispatcher = require('bot-framework/dispatcher')
 const { LoggerFactory } = require('logger.js')
 const logger = LoggerFactory.getLogger('client', 'cyan')
 const Discord = require('discord.js')
 /**
- * @type { { prefix: string, token: string, owners: Array<string> } }
+ * @type { { prefix: string, token: string, owners: Array<string>, debug: boolean } }
  */
 const config = require('./config.yml')
+logger.config(config.debug)
 const client = new Discord.Client()
 const data = require('./src/data')
 const lang = require('./lang/en.json')
@@ -42,13 +45,13 @@ process.on('SIGINT', async () => {
 client.on('channelCreate', channel => {
   const invalidTypes = ['dm', 'group'] // DMChannel and GroupDMChannel will be ignored
   if (invalidTypes.includes(channel.type)) return
-  data.commit(hashGenerator(80), channel.guild.id, 'channelCreate', `${channel.id},${channel.name},${channel.type}`, Date.now())
+  data.commit(hashGenerator(80), channel.guild.id, 'channelCreate', `${channel.id},${channel.name},${channel.type},${channel.parentID}`, Date.now())
 })
 
 client.on('channelDelete', channel => {
   const invalidTypes = ['dm', 'group'] // DMChannel and GroupDMChannel will be ignored
   if (invalidTypes.includes(channel.type)) return
-  data.commit(hashGenerator(80), channel.guild.id, 'channelDelete', `${channel.id},${channel.name},${channel.type}`, Date.now())
+  data.commit(hashGenerator(80), channel.guild.id, 'channelDelete', `${channel.id},${channel.name},${channel.type},${channel.parentID}`, Date.now())
 })
 
 module.exports = { client, lang }

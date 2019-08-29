@@ -90,9 +90,9 @@ module.exports = {
    * @param {string} commit A commit hash
    * @returns {Promise<Commit>} A commit
    */
-  getCommit(commit) {
+  getCommit(commit_hash) {
     return Commit.findOne({
-      where: { commit },
+      where: { commit_hash },
     })
   },
   /**

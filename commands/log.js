@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 
 module.exports = class extends Command {
   constructor() {
-    super('log')
+    super('log', { args: ['[page]'] })
   }
 
   async run(msg, lang, args, sendDeletable) {
@@ -33,13 +33,13 @@ module.exports = class extends Command {
         embed.setDescription('There are no commits in specified range.')
         break
       }
-      const commit = commits[i].dataValues
+      const commit = commits[i]
       const hash = commit['commit_hash'].substring(0, 7)
       const type = commit['type']
       const data = commit['data']
       const date = commit['committed_at']
       const convertedData = convert(type, data, date)
-      embed.addField('Commit: ' + hash, convertedData.description)
+      embed.addField('Commit: ' + hash, convertedData.description + '\nFull commit hash: ' + commit['commit_hash'])
       if (i >= commits.length-1) break
       if (i >= 25) break
     }

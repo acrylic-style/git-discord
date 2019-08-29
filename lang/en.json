@@ -3,7 +3,9 @@
     "help": "Displays command information.",
     "eval": "Eval(Run) script.",
     "version": "Displays version info.",
-    "log": "Fetch commit logs."
+    "log": "Fetch commit logs.",
+    "reset": "Reset to specified commit, you can use it like git reset --hard ...",
+    "rollback": "Rollbacks only specified commit"
   },
   "convert": {
     "no_description": "No description provided for: {0} ({1})",
