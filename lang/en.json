@@ -10,7 +10,14 @@
   "convert": {
     "no_description": "No description provided for: {0} ({1})",
     "channelDelete": "Channel #{0} was deleted at {1}",
-    "channelCreate": "Channel #{0} was created at {1}"
+    "channelCreate": "Channel #{0} was created at {1}",
+    "emojiDelete": "Emoji :{0}: was deleted at {1}",
+    "emojiCreate": "Emoji :{0}: was created at {1}",
+    "channelNameUpdate": "Channel #{0} name has changed to {1} at {2}",
+    "channelParentUpdate": "Category of channel #{0} has updated to {1} from {2} at {3}",
+    "channelTopicUpdate": "Channel #{0} topic has changed at {1}",
+    "channelPositionUpdate": "Channel #{0} position has updated to {1} from {2} at {3}",
+    "channelNSFWUpdate": "Channel #{0} NSFW status has updated to {1} from {2} at {3}"
   },
   "no_command": "Sorry, but we couldn't find command by provided name.",
   "youdonthaveperm": "Seems like you don't have enough permission to do this.",

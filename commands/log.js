@@ -27,7 +27,8 @@ module.exports = class extends Command {
       sendDeletable(embed)
       return
     }
-    for (let i = (page-1)*25; i <= page*25; i++) {
+    embed.setDescription(`${page}/${Math.ceil(commits.length/25)} pages, showing ${page*25}/${commits.length} entries`)
+    for (let i = (page-1)*25; i <= page*25-1; i++) {
       if (commits.length <= (page-1)*25) {
         embed.setColor([255,0,0])
         embed.setDescription('There are no commits in specified range.')
@@ -41,7 +42,7 @@ module.exports = class extends Command {
       const convertedData = convert(type, data, date)
       embed.addField('Commit: ' + hash, convertedData.description + '\nFull commit hash: ' + commit['commit_hash'])
       if (i >= commits.length-1) break
-      if (i >= 25) break
+      if (i >= (page*25)-1) break
     }
     sendDeletable(embed)
   }

@@ -104,8 +104,8 @@ module.exports = {
    * @param {number} committed_at Timestamp of this commit has made
    * @returns {Promise<Commit>} A new commit
    */
-  commit(commit_hash, server_id, type, data, committed_at) {
-    return Commit.create({ commit_hash, server_id, type, data, committed_at })
+  commit(commit_hash, server_id, type, data) {
+    return Commit.create({ commit_hash, server_id, type, data, committed_at: Date.now() })
   },
   /**
    * Get commit logs for specified server, ordered by timestamp.

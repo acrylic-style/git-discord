@@ -45,13 +45,31 @@ process.on('SIGINT', async () => {
 client.on('channelCreate', channel => {
   const invalidTypes = ['dm', 'group'] // DMChannel and GroupDMChannel will be ignored
   if (invalidTypes.includes(channel.type)) return
-  data.commit(hashGenerator(80), channel.guild.id, 'channelCreate', `${channel.id},${channel.name},${channel.type},${channel.parentID}`, Date.now())
+  data.commit(hashGenerator(80), channel.guild.id, 'channelCreate', `${channel.id},${channel.name},${channel.type},${channel.parentID}`)
 })
 
 client.on('channelDelete', channel => {
   const invalidTypes = ['dm', 'group'] // DMChannel and GroupDMChannel will be ignored
   if (invalidTypes.includes(channel.type)) return
-  data.commit(hashGenerator(80), channel.guild.id, 'channelDelete', `${channel.id},${channel.name},${channel.type},${channel.parentID}`, Date.now())
+  data.commit(hashGenerator(80), channel.guild.id, 'channelDelete', `${channel.id},${channel.name},${channel.type},${channel.parentID}`)
+})
+
+client.on('emojiCreate', emoji => {
+  data.commit(hashGenerator(80), emoji.guild.id, 'emojiCreate', `${emoji.id},${emoji.name},${emoji.url}`)
+})
+
+client.on('emojiDelete', emoji => {
+  data.commit(hashGenerator(80), emoji.guild.id, 'emojiDelete', `${emoji.id},${emoji.name},${emoji.url}`)
+})
+
+client.on('channelUpdate', (oldc, newc) => {
+  const invalidTypes = ['dm', 'group'] // DMChannel and GroupDMChannel will be ignored
+  if (invalidTypes.includes(newc.type)) return
+  if (oldc.name !== newc.name) return data.commit(hashGenerator(80), newc.guild.id, 'channelNameUpdate', `${newc.id},${oldc.name},${newc.name}`)
+  if (oldc.parentID !== newc.parentID) return data.commit(hashGenerator(80), newc.guild.id, 'channelParentUpdate', `${newc.id},${newc.name},${oldc.parent.name.replace(/,/g, '<colon>')},${newc.parent.name.replace(/,/g, '<colon>')},${oldc.parentID},${newc.parentID}`)
+  if (oldc.topic !== newc.topic) return data.commit(hashGenerator(80), newc.guild.id, 'channelTopicUpdate', `${newc.id},${newc.name},${oldc.topic.replace(/,/g, '<colon>')},${newc.topic.replace(/,/g, '<colon>')}`)
+  if (oldc.position !== newc.position) return data.commit(hashGenerator(80), newc.guild.id, 'channelPositionUpdate', `${newc.id},${newc.name},${oldc.position},${newc.position}`)
+  if (oldc.nsfw !== newc.nsfw) return data.commit(hashGenerator(80), newc.guild.id, 'channelNSFWUpdate', `${newc.id},${newc.name},${oldc.nsfw},${newc.nsfw}`)
 })
 
 module.exports = { client, lang }
