@@ -11,6 +11,8 @@ module.exports = class extends Command {
 
   async run(msg, lang, args, sendDeletable) {
     if (!args[1]) return msg.channel.send(':x: Invalid args.')
+    // eslint-disable-next-line
+    const data = require('../src/data') // for use data in eval easily
     args[1] = args[1].toString()
     !(async () => {
       if (args[1].includes('async:')) {

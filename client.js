@@ -12,7 +12,9 @@ const Discord = require('discord.js')
  */
 const config = require('./config.yml')
 const client = new Discord.Client()
+const data = require('./src/data')
 const lang = require('./lang/en.json')
+const hashGenerator = require('./src/functions/generateCommitHash')
 
 client.on('ready', () => {
   client.user.setActivity(`Say ${config.prefix}help`)
@@ -25,5 +27,28 @@ client.on('message', async msg => {
   }
 })
 
-logger.info('Logging in...')
-client.login(config.token)
+logger.info('Waiting for database...')
+process.once('dbready', () => {
+  logger.info('Logging in...')
+  client.login(config['token'])
+})
+
+process.on('SIGINT', async () => {
+  await client.destroy()
+  logger.info('Successfully disconnected from Discord.')
+  process.exit()
+})
+
+client.on('channelCreate', channel => {
+  const invalidTypes = ['dm', 'group'] // DMChannel and GroupDMChannel will be ignored
+  if (invalidTypes.includes(channel.type)) return
+  data.commit(hashGenerator(80), channel.guild.id, 'channelCreate', channel.id, Date.now())
+})
+
+client.on('channelDelete', channel => {
+  const invalidTypes = ['dm', 'group'] // DMChannel and GroupDMChannel will be ignored
+  if (invalidTypes.includes(channel.type)) return
+  data.commit(hashGenerator(80), channel.guild.id, 'channelDelete', channel.id, Date.now())
+})
+
+module.exports = { client, lang }

@@ -7,6 +7,7 @@ yarn-error.log*
 
 # Config
 config.yml
+database.sqlite
 
 # Runtime data
 pids
