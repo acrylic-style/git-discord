@@ -4,17 +4,11 @@ const Discord = require('discord.js')
 
 module.exports = class extends Command {
   constructor() {
-    super('log')
+    super('reset')
   }
 
   async run(msg, lang, args, sendDeletable) {
-    let page = 1
-    try { // eslint-disable-line
-      page = args.length === 2 ? Number.parseInt(args[1]) : 1
-    } catch (e) {
-      return sendDeletable(lang.must_number)
-    }
-    if (isNaN(page)) page = 1
+    const page = 1
     const data = require('../src/data')
     const commits = await data.getCommitLogs(msg.guild.id)
     const embed = new Discord.RichEmbed()
@@ -28,11 +22,6 @@ module.exports = class extends Command {
       return
     }
     for (let i = (page-1)*25; i <= page*25; i++) {
-      if (commits.length <= (page-1)*25) {
-        embed.setColor([255,0,0])
-        embed.setDescription('There are no commits in specified range.')
-        break
-      }
       const commit = commits[i].dataValues
       const hash = commit['commit_hash'].substring(0, 7)
       const type = commit['type']

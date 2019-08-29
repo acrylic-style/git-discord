@@ -14,5 +14,6 @@
   "youdonthaveperm": "Seems like you don't have enough permission to do this.",
   "yes": "Yes",
   "no": "No",
-  "commit_logs": "Commit logs"
+  "commit_logs": "Commit logs",
+  "must_number": "Argument must be number."
 }

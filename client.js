@@ -42,13 +42,13 @@ process.on('SIGINT', async () => {
 client.on('channelCreate', channel => {
   const invalidTypes = ['dm', 'group'] // DMChannel and GroupDMChannel will be ignored
   if (invalidTypes.includes(channel.type)) return
-  data.commit(hashGenerator(80), channel.guild.id, 'channelCreate', channel.name, Date.now())
+  data.commit(hashGenerator(80), channel.guild.id, 'channelCreate', `${channel.id},${channel.name},${channel.type}`, Date.now())
 })
 
 client.on('channelDelete', channel => {
   const invalidTypes = ['dm', 'group'] // DMChannel and GroupDMChannel will be ignored
   if (invalidTypes.includes(channel.type)) return
-  data.commit(hashGenerator(80), channel.guild.id, 'channelDelete', channel.name, Date.now())
+  data.commit(hashGenerator(80), channel.guild.id, 'channelDelete', `${channel.id},${channel.name},${channel.type}`, Date.now())
 })
 
 module.exports = { client, lang }
