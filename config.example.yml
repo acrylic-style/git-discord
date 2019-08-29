@@ -1,0 +1,4 @@
+token: 'your token here'
+prefix: 'git!' # With whitespace!
+owners:
+  - '575673035743559701' # make sure it's string
