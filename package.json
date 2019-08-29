@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "bot-framework": "acrylic-style/bot-framework",
+    "logger.js": "acrylic-style/logger.js",
+    "yaml": "^1.6.0"
+  }
+}
