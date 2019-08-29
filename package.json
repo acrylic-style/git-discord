@@ -3,6 +3,7 @@
     "bot-framework": "acrylic-style/bot-framework",
     "logger.js": "acrylic-style/logger.js",
     "minimist": "^1.2.0",
+    "mysql2": "^1.7.0",
     "sequelize": "^5.17.1",
     "sqlite3": "^4.1.0",
     "string-format": "^2.0.0",
