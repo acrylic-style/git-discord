@@ -2,12 +2,13 @@
   "commands": {
     "help": "Displays command information.",
     "eval": "Eval(Run) script.",
-    "version": "Displays version info."
+    "version": "Displays version info.",
+    "log": "Fetch commit logs."
   },
   "convert": {
     "no_description": "No description provided for: {0} ({1})",
-    "channelDelete": "Channel {0} was deleted at {1}",
-    "channelCreate": "Channel {0} was created at {1}"
+    "channelDelete": "Channel #{0} was deleted at {1}",
+    "channelCreate": "Channel #{0} was created at {1}"
   },
   "no_command": "Sorry, but we couldn't find command by provided name.",
   "youdonthaveperm": "Seems like you don't have enough permission to do this.",
