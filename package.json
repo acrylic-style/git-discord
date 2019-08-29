@@ -1,12 +1,30 @@
 {
   "dependencies": {
-    "bot-framework": "acrylic-style/bot-framework",
-    "logger.js": "acrylic-style/logger.js",
+    "bot-framework": "github:acrylic-style/bot-framework",
+    "logger.js": "github:acrylic-style/logger.js",
     "minimist": "^1.2.0",
     "mysql2": "^1.7.0",
     "sequelize": "^5.17.1",
     "sqlite3": "^4.1.0",
     "string-format": "^2.0.0",
     "yaml": "^1.6.0"
-  }
+  },
+  "name": "git-discord",
+  "description": "Manage server like git",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acrylic-style/git-discord.git"
+  },
+  "author": "acrylic-style",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/acrylic-style/git-discord/issues"
+  },
+  "homepage": "https://github.com/acrylic-style/git-discord#readme"
 }
