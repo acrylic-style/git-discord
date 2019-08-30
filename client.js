@@ -26,6 +26,7 @@ client.on('ready', () => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(config.prefix)) {
+    logger.info(`${msg.author.tag} [${msg.author.id}] sent command: ${msg.content}`)
     dispatcher(msg, lang, config.prefix, config.owners, config.prefix)
   }
 })
