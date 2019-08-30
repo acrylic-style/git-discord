@@ -4,19 +4,26 @@ const Discord = require('discord.js')
 
 module.exports = class extends Command {
   constructor() {
-    super('log', { args: ['[page]'] })
+    super('log', { args: ['[page/filter] [filter/page]'] })
   }
 
   async run(msg, lang, args, sendDeletable) {
     let page = 1
-    try { // eslint-disable-line
-      page = args.length === 2 ? Number.parseInt(args[1]) : 1
-    } catch (e) {
-      return sendDeletable(lang.must_number)
+    let find = ''
+    if (args.length === 2 && typeof args[1] === 'number') {
+      page = Number.parseInt(args[1])
+    } else if (args.length === 2 && typeof args[1] !== 'number') {
+      find = String(args[1])
+    } else if (args.length === 3 && typeof args[1] === 'number') {
+      page = Number.parseInt(args[1])
+      find = String(args[2])
+    } else if (args.length === 3 && typeof args[1] !== 'number') {
+      page = Number.parseInt(args[2])
+      find = String(args[1])
     }
     if (isNaN(page)) page = 1
     const data = require('../src/data')
-    const commits = await data.getCommitLogs(msg.guild.id)
+    let commits = await data.getCommitLogs(msg.guild.id)
     const embed = new Discord.RichEmbed()
     embed.setTitle(lang.commit_logs)
     embed.setTimestamp()
@@ -28,7 +35,8 @@ module.exports = class extends Command {
       return
     }
     embed.setDescription(`${page}/${Math.ceil(commits.length/25)} pages, showing ${page*25}/${commits.length} entries`)
-    for (let i = (page-1)*25; i <= page*25-1; i++) {
+    if (find !== '') commits = commits.filter(c => convert(c.type, c.data, c['committed_at']).description.toLowerCase().includes(find.toLowerCase()))
+    for (let i = (page-1)*25; i < page*25-1; i++) {
       if (commits.length <= (page-1)*25) {
         embed.setColor([255,0,0])
         embed.setDescription('There are no commits in specified range.')
@@ -40,6 +48,7 @@ module.exports = class extends Command {
       const data = commit['data']
       const date = commit['committed_at']
       const convertedData = convert(type, data, date)
+      //if (args.length === 3) if (!convertedData.description.toLowerCase().includes(Stringargs[2].toLowerCase())) continue
       embed.addField('Commit: ' + hash, convertedData.description + '\nFull commit hash: ' + commit['commit_hash'])
       if (i >= commits.length-1) break
       if (i >= (page*25)-1) break
