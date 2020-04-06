@@ -2,7 +2,7 @@
   "dependencies": {
     "bot-framework": "github:acrylic-style/bot-framework",
     "logger.js": "github:acrylic-style/logger.js",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.3",
     "mysql2": "^1.7.0",
     "sequelize": "^5.17.1",
     "sqlite3": "^4.1.0",
