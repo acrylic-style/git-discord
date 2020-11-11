@@ -203,10 +203,9 @@ bluebird@^3.5.0:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.5.tgz#a8d0afd73251effbbd5fe384a77d73003c17a71f"
   integrity sha512-5am6HnnfN+urzt4yfg7IgTbotDjIT/u8AJpEt0sIU9FtXfVeezXAPKswrG+xKUCOYAINpSdgZVDU6QFh+cuH3w==
 
-"bot-framework@github:acrylic-style/bot-framework":
-  version "3.1.0"
-  uid "3f06e772b6585fc4dac05c84bcc45fbe5e98c9d9"
-  resolved "https://codeload.github.com/acrylic-style/bot-framework/tar.gz/3f06e772b6585fc4dac05c84bcc45fbe5e98c9d9"
+bot-framework@acrylic-style/bot-framework:
+  version "3.1.1"
+  resolved "https://codeload.github.com/acrylic-style/bot-framework/tar.gz/7b0c3dc9bdb75eb2bc26fc1c927e9ba8075a74d3"
   dependencies:
     acorn "^7.1.1"
     discord.js "^12.0.2"
@@ -969,7 +968,6 @@ lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15:
 
 "logger.js@github:acrylic-style/logger.js":
   version "0.0.1"
-  uid "7d13a0c2d74cf1569b09a7ff4a1612fab3d83379"
   resolved "https://codeload.github.com/acrylic-style/logger.js/tar.gz/7d13a0c2d74cf1569b09a7ff4a1612fab3d83379"
   dependencies:
     chalk "^2.4.2"

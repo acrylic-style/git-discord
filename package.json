@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "bot-framework": "github:acrylic-style/bot-framework",
+    "bot-framework": "acrylic-style/bot-framework",
     "logger.js": "github:acrylic-style/logger.js",
     "minimist": "^1.2.3",
     "mysql2": "^1.7.0",
