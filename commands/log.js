@@ -34,7 +34,7 @@ module.exports = class extends Command {
       sendDeletable(embed)
       return
     }
-    embed.setDescription(`${page}/${Math.ceil(commits.length/25)} pages, showing ${page*25}/${commits.length} entries`)
+    embed.setDescription(`${page}/${Math.ceil(commits.length/25)} pages, showing ${Math.min(commits.length, page*25)}/${commits.length} entries`)
     if (find !== '') commits = commits.filter(c => convert(c.type, c.data, c['committed_at']).description.toLowerCase().includes(find.toLowerCase()))
     for (let i = (page-1)*25; i < page*25-1; i++) {
       if (commits.length <= (page-1)*25) {

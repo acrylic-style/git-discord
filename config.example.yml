@@ -1,5 +1,5 @@
 token: 'your token here'
-prefix: 'git!' # With whitespace!
+prefix: 'git!' # dont put whitespace, please
 owners:
   - '575673035743559701' # make sure it's string
 database:
