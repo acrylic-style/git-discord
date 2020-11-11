@@ -1,6 +1,6 @@
 const f = require('string-format')
 const Discord = require('discord.js') // eslint-disable-line
-// ^ for type completion
+// ^ for typing
 
 /**
  * @param {string} type
@@ -17,25 +17,25 @@ const Discord = require('discord.js') // eslint-disable-line
  *   description: string,
  * } }
  */
-module.exports = (type, data, date) => {
+module.exports = async (type, data, date) => {
   const { client, lang } = require('../../client')
-  const channel = client.channels.get(data.split(',')[0]) || data.split(',')[1] // eslint-disable-line
+  const channel = await client.channels.fetch(data.split(',')[0]) || data.split(',')[1] // eslint-disable-line
   const ds = new Date(date).toLocaleString()
   switch (type) {
     case 'channelCreate':
     case 'channelDelete':
     case 'emojiCreate':
     case 'emojiDelete':
-      return { data: client.channels.get(data), description: f(lang.convert[type], data.split(',')[1], ds) }
+      return { data: await client.channels.fetch(data), description: f(lang.convert[type], data.split(',')[1], ds) }
     case 'channelNameUpdate':
-      return { data: client.channels.get(data), description: f(lang.convert[type], data.split(',')[1], data.split(',')[2], ds) }
+      return { data: await client.channels.fetch(data), description: f(lang.convert[type], data.split(',')[1], data.split(',')[2], ds) }
     case 'channelParentUpdate':
-      return { data: client.channels.get(data), description: f(lang.convert[type], data.split(',')[1], data.split(',')[5].replace(/<colon>/g, ','), data.split(',')[4].replace(/<colon>/g, ','), ds) }
+      return { data: await client.channels.fetch(data), description: f(lang.convert[type], data.split(',')[1], data.split(',')[5].replace(/<colon>/g, ','), data.split(',')[4].replace(/<colon>/g, ','), ds) }
     case 'channelTopicUpdate':
-      return { data: client.channels.get(data), description: f(lang.convert[type], data.split(',')[1], ds) }
+      return { data: await client.channels.fetch(data), description: f(lang.convert[type], data.split(',')[1], ds) }
     case 'channelPositionUpdate':
     case 'channelNSFWUpdate':
-      return { data: client.channels.get(data), description: f(lang.convert[type], data.split(',')[1], data.split(',')[3], data.split(',')[2], ds) }
+      return { data: await client.channels.fetch(data), description: f(lang.convert[type], data.split(',')[1], data.split(',')[3], data.split(',')[2], ds) }
     default:
       return { data, description: f(lang.convert.no_description, data, ds) }
   }

@@ -27,7 +27,7 @@ module.exports = class extends Command {
       return
     }
     try { // eslint-disable-line
-      rollback(commit['server_id'], commit['type'], commit['data'])
+      await rollback(commit['server_id'], commit['type'], commit['data'])
       logger.debug(`Rollback of ${commit['commit_hash']} (in ${commit['server_id']}) has been rollbacked successfully.`)
     } catch (e) {
       logger.error('There was an error while rollbacking commit!')

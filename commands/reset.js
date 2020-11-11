@@ -25,7 +25,7 @@ module.exports = class extends Command {
     }
     if (!commits.some(commit => commit['commit_hash'] === args[1])) {
       embed.setColor([255,0,0])
-      embed.setDescription('Couldn\'t find commit! (Did you specified full commit hash?)')
+      embed.setDescription('Couldn\'t find commit! (Did you specify full commit hash?)')
       return
     }
     for (let i = 0; i <= commits.length-1; i++) {
@@ -45,7 +45,7 @@ module.exports = class extends Command {
       const data = commit['data']
       const date = commit['committed_at']
       try { // eslint-disable-line
-        rollback(server, type, data)
+        await rollback(server, type, data)
         logger.debug(`Rollback of ${commit['commit_hash']} (in ${commit['server_id']}) has been rollbacked successfully.`)
       } catch (e) {
         logger.error('There was an error while rollbacking commit!')

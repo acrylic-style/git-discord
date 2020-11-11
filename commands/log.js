@@ -47,7 +47,7 @@ module.exports = class extends Command {
       const type = commit['type']
       const data = commit['data']
       const date = commit['committed_at']
-      const convertedData = convert(type, data, date)
+      const convertedData = await convert(type, data, date)
       //if (args.length === 3) if (!convertedData.description.toLowerCase().includes(Stringargs[2].toLowerCase())) continue
       embed.addField('Commit: ' + hash, convertedData.description + '\nFull commit hash: ' + commit['commit_hash'])
       if (i >= commits.length-1) break
