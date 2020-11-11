@@ -19,7 +19,7 @@ const Discord = require('discord.js') // eslint-disable-line
  */
 module.exports = async (type, data, date) => {
   const { client, lang } = require('../../client')
-  const channel = await client.channels.fetch(data.split(',')[0]) || data.split(',')[1] // eslint-disable-line
+  //const channel = await client.channels.fetch(data.split(',')[0]) || data.split(',')[1] // eslint-disable-line
   const ds = new Date(date).toLocaleString()
   switch (type) {
     case 'channelCreate':
