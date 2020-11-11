@@ -27,17 +27,22 @@ module.exports = class extends Command {
     const embed = new Discord.MessageEmbed()
     embed.setTitle(lang.commit_logs)
     embed.setTimestamp()
-    embed.setColor([0,255,0])
+    embed.setColor([0, 255, 0])
     if (commits.length === 0) {
-      embed.setColor([255,0,0])
+      embed.setColor([255, 0, 0])
       embed.setDescription('There are no commits in this server!')
       sendDeletable(embed)
       return
     }
-    embed.setDescription(`${page}/${Math.ceil(commits.length/25)} pages, showing ${Math.min(commits.length, page*25)}/${commits.length} entries`)
-    if (find !== '') commits = commits.filter(c => convert(c.type, c.data, c['committed_at']).description.toLowerCase().includes(find.toLowerCase()))
-    for (let i = (page-1)*25; i < page*25-1; i++) {
-      if (commits.length <= (page-1)*25) {
+    embed.setDescription(`${page}/${Math.ceil(commits.length / 25)} pages, showing ${Math.min(commits.length, page * 25)}/${commits.length} entries`)
+    if (find !== '') {
+      for (let i = 0; i < commits.length; i++) {
+        const c = commits[i]
+        if (!await convert(c.type, c.data, c['committed_at']).description.toLowerCase().includes(find.toLowerCase())) commits = commits.filter(c2 => c2 !== c)
+      }
+    }
+    for (let i = (page-1)*25; i < page * 25 - 1; i++) {
+      if (commits.length <= (page - 1) * 25) {
         embed.setColor([255,0,0])
         embed.setDescription('There are no commits in specified range.')
         break
