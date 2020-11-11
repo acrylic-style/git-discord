@@ -24,7 +24,7 @@ module.exports = class extends Command {
     if (isNaN(page)) page = 1
     const data = require('../src/data')
     let commits = await data.getCommitLogs(msg.guild.id)
-    const embed = new Discord.RichEmbed()
+    const embed = new Discord.MessageEmbed()
     embed.setTitle(lang.commit_logs)
     embed.setTimestamp()
     embed.setColor([0,255,0])

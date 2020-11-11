@@ -13,7 +13,7 @@ module.exports = class extends Command {
     if (args.length <= 1) return sendDeletable(':x: You need full commit hash!')
     const data = require('../src/data')
     const commit = await data.getCommit(args[1])
-    const embed = new Discord.RichEmbed()
+    const embed = new Discord.MessageEmbed()
     embed.setTitle(lang.commit_logs)
     embed.setTimestamp()
     embed.setColor([0,255,0])
