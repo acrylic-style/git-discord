@@ -9,3 +9,4 @@ database:
   type: sqlite
   host: localhost
 debug: false
+hashLength: 30

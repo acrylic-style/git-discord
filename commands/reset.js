@@ -2,7 +2,7 @@ const { Command } = require('bot-framework')
 const convert = require('../src/functions/convertData')
 const rollback = require('../src/functions/rollback')
 const Discord = require('discord.js')
-const logger = require('logger.js').LoggerFactory.getLogger('commands:reset', 'purple')
+const logger = require('logger.js').LoggerFactory.getLogger('commands:reset', 'purple').config(process.env.debug)
 
 module.exports = class extends Command {
   constructor() {
@@ -61,7 +61,7 @@ module.exports = class extends Command {
       //if (i >= commits.length-1) break
     }
     const ccommit = await data.getCommit(args[1])
-    const convertedData = convert(ccommit.type, ccommit.data, ccommit.date)
+    const convertedData = await convert(ccommit.type, ccommit.data, ccommit.date)
     embed.setDescription('HEAD is now: ' + convertedData.description + ` (${args[1].substring(0, 7)})\n\nRollbacked commits:`)
     sendDeletable(embed)
   }
