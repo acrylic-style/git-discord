@@ -38,7 +38,7 @@ module.exports = class extends Command {
     if (find !== '') {
       for (let i = 0; i < commits.length; i++) {
         const c = commits[i]
-        if (!await convert(c.type, c.data, c['committed_at']).description.toLowerCase().includes(find.toLowerCase())) commits = commits.filter(c2 => c2 !== c)
+        if (!(await convert(c.type, c.data, c['committed_at'])).description.toLowerCase().includes(find.toLowerCase())) commits = commits.filter(c2 => c2 !== c)
       }
     }
     for (let i = (page-1)*25; i < page * 25 - 1; i++) {
