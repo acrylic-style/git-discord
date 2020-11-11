@@ -7,7 +7,7 @@ module.exports = class extends Command {
     super('log', { args: ['[page/filter] [filter/page]'] })
   }
 
-  async run(msg, lang, args, sendDeletable) {
+  async run(msg, lang, args) {
     let page = 1
     let find = ''
     if (args.length === 2 && typeof args[1] === 'number') {
@@ -31,7 +31,7 @@ module.exports = class extends Command {
     if (commits.length === 0) {
       embed.setColor([255, 0, 0])
       embed.setDescription('There are no commits in this server!')
-      sendDeletable(embed)
+      msg.channel.send(embed)
       return
     }
     embed.setDescription(`${page}/${Math.ceil(commits.length / 25)} pages, showing ${Math.min(commits.length, page * 25)}/${commits.length} entries`)
@@ -58,6 +58,6 @@ module.exports = class extends Command {
       if (i >= commits.length-1) break
       if (i >= (page*25)-1) break
     }
-    sendDeletable(embed)
+    msg.channel.send(embed)
   }
 }

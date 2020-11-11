@@ -20,7 +20,7 @@ module.exports = class extends Command {
     if (commits.length === 0) {
       embed.setColor([255,0,0])
       embed.setDescription('There are no commits in this server!')
-      sendDeletable(embed)
+      msg.channel.send(embed)
       return
     }
     if (!commits.some(commit => commit['commit_hash'] === args[1])) {
@@ -38,7 +38,7 @@ module.exports = class extends Command {
         logger.error(`Commit hash: ${commit['commit_hash']}\nGuild should be: ${msg.guild.id}\nBut actually provided: ${server}`)
         embed.setColor([255,0,0])
         embed.setDescription('Validation error, please report it for developers!')
-        sendDeletable(embed)
+        msg.channel.send(embed)
         return
       }
       const type = commit['type']
@@ -52,7 +52,7 @@ module.exports = class extends Command {
         logger.error(require('util').inspect(e))
         embed.setColor([255,0,0])
         embed.setDescription('There was an error while rollbacking commit.\nReset operation has been cancelled.\n\nError: ' + e)
-        sendDeletable(embed)
+        msg.channel.send(embed)
         return
       }
       const convertedData = convert(type, data, date)
@@ -63,6 +63,6 @@ module.exports = class extends Command {
     const ccommit = await data.getCommit(args[1])
     const convertedData = await convert(ccommit.type, ccommit.data, ccommit.date)
     embed.setDescription('HEAD is now: ' + convertedData.description + ` (${args[1].substring(0, 7)})\n\nRollbacked commits:`)
-    sendDeletable(embed)
+    msg.channel.send(embed)
   }
 }

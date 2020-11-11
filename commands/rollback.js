@@ -23,7 +23,7 @@ module.exports = class extends Command {
       logger.error(`Commit hash: ${commit['commit_hash']}\nGuild should be: ${msg.guild.id}\nBut actually provided: ${commit['server_id']}`)
       embed.setColor([255,0,0])
       embed.setDescription('Validation error, please report it for developers!')
-      sendDeletable(embed)
+      msg.channel.send(embed)
       return
     }
     try { // eslint-disable-line
@@ -34,11 +34,11 @@ module.exports = class extends Command {
       logger.error(require('util').inspect(e))
       embed.setColor([255,0,0])
       embed.setDescription('There was an error while rollbacking commit.\nReset operation has been cancelled.\n\nError: ' + e)
-      sendDeletable(embed)
+      msg.channel.send(embed)
       return
     }
     const convertedData = await convert(commit.type, commit.data, commit.date)
     embed.setDescription(`Rollbacked commit: ${convertedData.description} (${args[1].substring(0, 7)})`)
-    sendDeletable(embed)
+    msg.channel.send(embed)
   }
 }
